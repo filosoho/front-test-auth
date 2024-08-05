@@ -1,0 +1,14 @@
+.home-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+h2 {
+  color: var(--text-color);
+}
+
+.lottie {
+  width: 200px;
+}

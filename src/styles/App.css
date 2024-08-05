@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playwrite+AR:wght@100..400&display=swap");
+
+:root {
+  --primary-color: #f5945c;
+  --secondary-color: #3498db;
+  --third-color: #ffffff;
+  --text-color: #333;
+  --secondary-text-color: #727272;
+  --background-color: #f4f4f4;
+  --border-radius: 5px;
+
+  --primary-color-hover: #f5813e;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
