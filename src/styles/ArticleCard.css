@@ -1,26 +1,20 @@
 .article-card {
-  border: 1px solid #ccc;
   padding: 15px;
   min-width: 200px;
-  margin: 10px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: var(--border-radius);
-  background-color: #fff;
   transition: box-shadow 0.3s ease;
 }
 
 .large-article-card {
-  border: 1px solid #ccc;
+  border: 1px solid #e8e7e7;
   padding: 20px;
   min-width: 300px;
   margin: 10px;
-  box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 4px 16px rgb(164 164 164 / 20%);
   border-radius: var(--border-radius);
   background-color: #fff;
   transition: box-shadow 0.3s ease;
 }
 
-.article-card:hover,
 .large-article-card:hover {
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
 }
@@ -39,9 +33,19 @@
   color: var(--text-color);
 }
 
+.article-title:hover {
+  text-decoration: underline;
+  color: var(--primary-color);
+}
 .article-date {
   font-size: 0.8em;
   color: var(--secondary-text-color);
+}
+
+.article-topic {
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-top: 0.5em;
 }
 
 .large-article-card img {
