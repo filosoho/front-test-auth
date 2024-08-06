@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { fetchArticles } from "../services/api";
 import ArticlesList from "./ArticlesList";
 import Lottie from "lottie-react";
-import loadingHand from "../assets/animations/loading-animation.json";
+import loadingHand from "../assets/animations/loading-animation3.json";
 import "../styles/HomePage.css";
 
 const HomePage = () => {
@@ -21,18 +21,18 @@ const HomePage = () => {
 
   if (isLoading) {
     return (
-      <div className="home-page">
-        <div className="lottie">
+      <section className="home-page">
+        <article className="lottie">
           <Lottie className="lottie" animationData={loadingHand} loop={true} />
-        </div>
-      </div>
+        </article>
+      </section>
     );
   }
 
   return (
-    <div className="home-page">
+    <section className="home-page">
       <ArticlesList articles={articles} />
-    </div>
+    </section>
   );
 };
 

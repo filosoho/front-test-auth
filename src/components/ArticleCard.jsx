@@ -7,13 +7,25 @@ const ArticleCard = ({ article, isLarge }) => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   };
 
+  const truncateText = (text, maxLength) => {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.slice(0, maxLength) + "...";
+  };
+
+  const altText = `Image for the article titled "${truncateText(
+    article.title,
+    40
+  )}" in the ${article.topic} topic`;
+
   return (
-    <div className={`article-card ${isLarge ? "large-article-card" : ""}`}>
+    <article className={`article-card ${isLarge ? "large-article-card" : ""}`}>
       <Link to={`/articles/${article.article_id}`} className="article-link">
         {article.article_img_url && (
           <img
             src={article.article_img_url}
-            alt={article.title}
+            alt={altText}
             className="article-image"
           />
         )}
@@ -21,9 +33,11 @@ const ArticleCard = ({ article, isLarge }) => {
         <p className="article-date">
           {new Date(article.created_at).toLocaleDateString()}
         </p>
-        <p className="article-topic">{capitalizeFirstLetter(article.topic)}</p>
+        <p className="article-topic">
+          {"#" + capitalizeFirstLetter(article.topic)}
+        </p>
       </Link>
-    </div>
+    </article>
   );
 };
 
