@@ -2,21 +2,40 @@ header {
   background-color: var(--third-color);
   padding: 20px;
   color: var(--primary-color);
+  height: auto;
   text-align: center;
+  box-shadow: 4px 8px 20px -6px #9c9c9c;
 }
 
 header h1 {
   font-family: "Bebas Neue", sans-serif;
   font-size: 3rem;
-  padding-bottom: 2rem;
-}
-
-.logo-anchor {
-  margin: 0 0.5rem;
+  padding-bottom: 1.5rem;
+  margin-top: 2rem;
 }
 
 .logo-img {
   width: 60px;
-  margin: 2rem auto 0 2rem;
+  margin: 1rem auto 1rem 2rem;
   position: absolute;
+}
+
+.user-greeting {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 2rem 0;
+}
+
+.user-container {
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+}
+
+.user-container h2 {
+  font-size: 1rem;
+}
+
+.icon.profile {
+  margin-left: 0.5rem;
 }

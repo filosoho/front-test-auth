@@ -1,17 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { truncateText } from "../utils";
 import "../styles/ArticleCard.css";
 
 const ArticleCard = ({ article, isLarge }) => {
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-  };
-
-  const truncateText = (text, maxLength) => {
-    if (text.length <= maxLength) {
-      return text;
-    }
-    return text.slice(0, maxLength) + "...";
   };
 
   const altText = `Image for the article titled "${truncateText(
