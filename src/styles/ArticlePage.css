@@ -1,0 +1,42 @@
+.article-page {
+  padding: 20px;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.article-page > .article-title {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.article-page > .article-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.article-page > .article-author {
+  font-size: 1.1em;
+  color: var(--third-text-color);
+  margin-bottom: 10px;
+}
+
+.article-page > .article-date {
+  color: var(--third-text-color);
+  margin-bottom: 20px;
+}
+
+.article-page > .article-body {
+  line-height: 1.6;
+}
+
+.error-404-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.error-404-image {
+  width: 500px;
+  height: auto;
+  margin: 0 auto;
+}

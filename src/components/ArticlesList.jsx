@@ -19,18 +19,18 @@ const ArticlesList = () => {
   const [largeArticle, ...otherArticles] = articles;
 
   return (
-    <div className="articles-list">
+    <section className="articles-list">
       {largeArticle && (
-        <div className="large-article">
+        <article className="large-article">
           <ArticleCard article={largeArticle} isLarge />
-        </div>
+        </article>
       )}
-      <div className="grid-articles">
+      <article className="grid-articles">
         {otherArticles.map((article) => (
           <ArticleCard key={article.article_id} article={article} />
         ))}
-      </div>
-    </div>
+      </article>
+    </section>
   );
 };
 

@@ -1,15 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playwrite+AR:wght@100..400&display=swap");
 
 :root {
-  --primary-color: #f5945c;
+  --primary-color: #e6141e;
   --secondary-color: #3498db;
   --third-color: #ffffff;
+  --fourth-color: #f5945c;
   --text-color: #333;
   --secondary-text-color: #727272;
+  --third-text-color: #15547e;
   --background-color: #f4f4f4;
   --border-radius: 5px;
 
-  --primary-color-hover: #f5813e;
+  --primary-color-hover: #a3030b;
 }
 
 body {
