@@ -113,6 +113,12 @@ button:hover {
   background-color: var(--primary-color-hover);
 }
 
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 /* Media Queries */
 @media (min-width: 600px) {
   .comment-card {

@@ -7,10 +7,14 @@
   --third-color: #ffffff;
   --fourth-color: #f5945c;
 
+  --primary-color-dark: #c21019;
+
   --highlight-color: #e6141e;
 
   --primary-color-hover: #f7323b;
   --secondary-color-hover: #15547e;
+
+  --primary-color-hover-dark: #940007;
 
   --text-color: #333;
   --secondary-text-color: #727272;
@@ -18,10 +22,10 @@
   --fourth-text-color: rgb(78, 78, 78);
 
   --btn: #15547e;
-  --btn-vote: rgb(73, 121, 34);
+  --confirm-btn: #2c5d04;
 
   --btn-hover: #1d6392;
-  --btn-vote-hover: rgb(109, 173, 56);
+  --confirm-btn-hover: #244b04;
 
   --success-color: green;
 

@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { fetchCommentsByArticleId, postComment } from "../services/api";
+import {
+  fetchCommentsByArticleId,
+  postComment,
+  deleteComment,
+} from "../services/api";
 import { UserContext } from "../contexts/UserContext";
 import CommentCard from "./CommentCard";
+import ConfirmationDialog from "./ConfirmationDialog";
 import commentsImg from "../assets/comments.png";
 import Loading from "./Loading";
 import "../styles/CommentsSection.css";
@@ -14,6 +19,8 @@ const CommentsSection = ({ articleId }) => {
   const [commentText, setCommentText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [commentToDelete, setCommentToDelete] = useState(null);
 
   useEffect(() => {
     fetchCommentsByArticleId(articleId)
@@ -72,7 +79,41 @@ const CommentsSection = ({ articleId }) => {
       })
       .finally(() => {
         setIsSubmitting(false);
+        setSuccessMessage("");
       });
+  };
+
+  const showDialog = (comment) => {
+    setCommentToDelete(comment);
+    setDialogVisible(true);
+  };
+
+  const handleDelete = () => {
+    if (!commentToDelete) return;
+
+    deleteComment(commentToDelete.comment_id)
+      .then((response) => {
+        if (response.status === 204) {
+          setComments((prevComments) =>
+            prevComments.filter(
+              (comment) => comment.comment_id !== commentToDelete.comment_id
+            )
+          );
+          setSuccessMessage("Comment deleted successfully.");
+        }
+      })
+      .catch(() => {
+        setSuccessMessage("Failed to delete comment. Please try again.");
+      })
+      .finally(() => {
+        setDialogVisible(false);
+        setCommentToDelete(null);
+      });
+  };
+
+  const handleCancel = () => {
+    setDialogVisible(false);
+    setCommentToDelete(null);
   };
 
   if (isLoading) {
@@ -127,10 +168,19 @@ const CommentsSection = ({ articleId }) => {
               key={comment.comment_id}
               comment={comment}
               user={loggedInUser}
+              onDelete={showDialog}
+              // onDelete={handleDelete}
             />
           ))}
         </div>
       </section>
+      {dialogVisible && (
+        <ConfirmationDialog
+          message="Are you sure you want to delete this comment?"
+          onConfirm={handleDelete}
+          onCancel={handleCancel}
+        />
+      )}
     </>
   );
 };
