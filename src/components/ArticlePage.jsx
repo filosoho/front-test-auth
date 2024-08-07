@@ -83,7 +83,7 @@ const ArticlePage = () => {
       <article className="voting-article">
         <div className="article-page article-content">
           <div className="icon-votes-box">
-            <img className="votes-icon" src={votesIcon} />
+            <img className="votes-icon" src={votesIcon} alt="votes icon" />
             <div className="article-vote-container">
               <button className="vote-arrow" onClick={() => handleVote(1)}>
                 <img

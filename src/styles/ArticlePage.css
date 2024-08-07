@@ -7,6 +7,8 @@
 .article-page > .article-title {
   font-size: 2em;
   margin-bottom: 20px;
+  text-decoration: none;
+  color: var(--text-color);
 }
 
 .article-page > .article-image {
@@ -114,4 +116,22 @@
 .vote-error {
   color: red;
   margin-top: 5px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .article-page > .article-title {
+    font-size: 1.3rem;
+  }
+
+  .article-content {
+    padding: 1em;
+    border: none;
+    box-shadow: none;
+  }
+
+  .icon-votes-box {
+    display: flex;
+    margin-left: 1rem;
+  }
 }

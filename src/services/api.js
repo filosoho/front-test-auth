@@ -41,3 +41,11 @@ export const postComment = (articleId, comment) => {
     .post(`/articles/${articleId}/comments`, comment)
     .then((response) => response.data.comment);
 };
+
+export const deleteComment = (commentId) => {
+  return api.delete(`/comments/${commentId}`).then((response) => {
+    if (response.status === 204) {
+      return response;
+    }
+  });
+};
