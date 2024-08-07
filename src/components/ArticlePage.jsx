@@ -35,7 +35,8 @@ const ArticlePage = () => {
 
   const handleVote = (voteChange) => {
     if (!isLoggedIn) {
-      return;
+      setError("Log in to vote on this article.");
+      return error;
     } else {
       setVotes(votes + voteChange);
       setError("");
@@ -84,28 +85,23 @@ const ArticlePage = () => {
           <div className="icon-votes-box">
             <img className="votes-icon" src={votesIcon} />
             <div className="article-vote-container">
-              {isLoggedIn ? (
-                <>
-                  <button className="vote-arrow" onClick={() => handleVote(1)}>
-                    <img
-                      className="arrow-vote"
-                      src={upArrow}
-                      alt="up arrow for upvote"
-                    />
-                  </button>
-                  {votes}
-                  <button className="vote-arrow" onClick={() => handleVote(-1)}>
-                    <img
-                      className="arrow-vote"
-                      src={downArrow}
-                      alt="down arrow for downvote"
-                    />
-                  </button>
-                </>
-              ) : (
-                <p>{votes}</p>
-              )}
+              <button className="vote-arrow" onClick={() => handleVote(1)}>
+                <img
+                  className="arrow-vote"
+                  src={upArrow}
+                  alt="up arrow for upvote"
+                />
+              </button>
+              {votes}
+              <button className="vote-arrow" onClick={() => handleVote(-1)}>
+                <img
+                  className="arrow-vote"
+                  src={downArrow}
+                  alt="down arrow for downvote"
+                />
+              </button>
             </div>
+            {error && <p className="vote-error">{error}</p>}
           </div>
           <h1 className="article-title">{article.title}</h1>
           <p className="article-author">By {article.author}</p>
@@ -115,7 +111,6 @@ const ArticlePage = () => {
           <article className="article-body">{article.body}</article>
         </div>
       </article>
-      {error && <p className="vote-error">{error}</p>}
       <CommentsSection articleId={articleId} user={loggedInUser} />
     </section>
   );
