@@ -27,3 +27,11 @@ export const fetchUsers = () => {
     return response.data.users;
   });
 };
+
+export const voteOnArticle = (articleId, voteChange) => {
+  return api
+    .patch(`/articles/${articleId}`, { inc_votes: voteChange })
+    .then((response) => {
+      return response.data.article;
+    });
+};
