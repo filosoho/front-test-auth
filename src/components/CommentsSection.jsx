@@ -3,11 +3,13 @@ import { fetchCommentsByArticleId } from "../services/api";
 import { UserContext } from "../contexts/UserContext";
 import CommentCard from "./CommentCard";
 import commentsImg from "../assets/comments.png";
+import Loading from "./Loading";
 import "../styles/CommentsSection.css";
 
 const CommentsSection = ({ articleId }) => {
   const { users, loggedInUser } = useContext(UserContext);
   const [comments, setComments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -18,9 +20,15 @@ const CommentsSection = ({ articleId }) => {
           user: users[comment.author],
         }));
         setComments(commentsWithUserDetails);
+        setIsLoading(false);
       })
       .catch((error) => setError("Error fetching comments: " + error.message));
+    setIsLoading(false);
   }, [articleId, users]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
