@@ -26,11 +26,11 @@ const ArticleCard = ({ article, isLarge }) => {
         <h2 className="article-title">{article.title}</h2>
         <div className="content-card">
           <div>
-            <p className="article-date">
-              {new Date(article.created_at).toLocaleDateString()}
-            </p>
             <p className="article-topic">
               {"#" + capitalizeFirstLetter(article.topic)}
+            </p>
+            <p className="article-date">
+              {new Date(article.created_at).toLocaleDateString()}
             </p>
           </div>
           <div className="comments-votes">

@@ -1,5 +1,5 @@
 import React from "react";
-import Lottie from "lottie-react";
+import Lottie from "lottie-light-react";
 import loadingHand from "../assets/animations/loading-animation3.json";
 import "../styles/Loading.css";
 
