@@ -1,0 +1,48 @@
+.articles-by-topic-page {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.articles-by-topic-page h1 {
+  font-size: 2em;
+  margin: 4rem auto;
+  text-align: left;
+  text-transform: uppercase;
+  padding-left: 0.5em;
+}
+
+.articles-list {
+  list-style: none;
+  padding: 0;
+}
+
+.article-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.article-item:hover {
+  background-color: #f1f1f1;
+}
+
+.article-item a {
+  font-size: 1.5em;
+  color: #0073e6;
+  text-decoration: none;
+}
+
+.article-item p {
+  margin: 5px 0;
+  color: #555;
+}
+.articles-topic-list {
+  flex: 1 1 55%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 30px;
+}
