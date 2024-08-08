@@ -1,6 +1,11 @@
 .article-card {
+  display: flex;
   padding: 15px;
   min-width: 200px;
+  background-color: var(--third-color);
+  border-radius: 10px;
+  border: 1px solid #e1e1e1;
+  box-shadow: 5px 5px 7px -2px #d8d8d8;
   transition: box-shadow 0.3s ease;
 }
 .content-card {
@@ -9,6 +14,15 @@
   align-items: center;
 }
 
+.content-card p {
+  margin-bottom: 0.5em;
+}
+
+.comments-votes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
 .comments-votes p {
   font-size: 0.9em;
   font-weight: 500;
@@ -31,11 +45,12 @@
 }
 
 .article-link {
+  flex-direction: column;
+  justify-content: space-between;
   text-decoration: none;
   color: inherit;
   flex-grow: 1;
   display: flex;
-  flex-direction: column;
 }
 
 .article-title {
@@ -56,7 +71,6 @@
 .article-topic {
   font-size: 0.9em;
   font-weight: 500;
-  margin-top: 0.5em;
 }
 
 .large-article-card img {
