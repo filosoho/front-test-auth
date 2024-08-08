@@ -6,7 +6,7 @@ import { truncateText } from "../utils";
 import CommentsSection from "./CommentsSection";
 import Loading from "./Loading";
 import Voting from "./Voting";
-import error404Image from "../assets/Oops! 404 Error with a broken robot-cuate.svg";
+import { BadRequestPage, NotFoundArticle } from "./ErrorsComponent.jsx";
 import "../styles/ArticlePage.css";
 
 const ArticlePage = () => {
@@ -14,17 +14,30 @@ const ArticlePage = () => {
   const { loggedInUser } = useContext(UserContext);
   const [article, setArticle] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    setIsLoading(true);
+    setError(null);
+
     fetchArticleById(articleId)
       .then((data) => {
         setArticle(data);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching article:", error);
         setIsLoading(false);
+        if (error.response) {
+          if (error.response.status === 404) {
+            setError("Article not found");
+          } else if (error.response.status === 400) {
+            setError("Bad request");
+          } else {
+            setError("An unexpected error occurred");
+          }
+        } else {
+          setError("Network error");
+        }
       });
   }, [articleId]);
 
@@ -32,17 +45,18 @@ const ArticlePage = () => {
     return <Loading />;
   }
 
+  if (error) {
+    if (error === "Article not found") {
+      return <NotFoundArticle />;
+    } else if (error === "Bad request") {
+      return <BadRequestPage />;
+    } else {
+      return <div className="error-page">Error: {error}</div>;
+    }
+  }
+
   if (!article) {
-    return (
-      <section className="error-404-section">
-        <img
-          src={error404Image}
-          alt="Oops! 404 Error with a broken robot-cuate"
-          className="error-404-image"
-        />
-        <h3>Article Not Found</h3>
-      </section>
-    );
+    return <NotFoundArticle />;
   }
 
   const altText = `Image for the article titled "${truncateText(

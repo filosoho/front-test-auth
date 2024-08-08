@@ -4,6 +4,7 @@ import Select from "react-select";
 import { fetchArticles, fetchTopics } from "../services/api";
 import ArticlesList from "./ArticlesList";
 import Loading from "./Loading";
+import { TopicNotFound } from "./ErrorsComponent";
 import "../styles/HomePage.css";
 
 const HomePage = () => {
@@ -15,6 +16,7 @@ const HomePage = () => {
   const [order, setOrder] = useState("desc");
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -33,7 +35,11 @@ const HomePage = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching topics or articles: ", error);
+        if (error.response && error.response.status === 404) {
+          setError("Topic not found.");
+        } else {
+          setError("An unexpected error occurred.");
+        }
         setIsLoading(false);
       });
   }, [searchParams]);
@@ -79,6 +85,10 @@ const HomePage = () => {
 
   if (isLoading) {
     return <Loading />;
+  }
+
+  if (error) {
+    return <TopicNotFound />;
   }
 
   return (

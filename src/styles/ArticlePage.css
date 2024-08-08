@@ -46,15 +46,10 @@
   justify-content: flex-end;
 }
 
-.error-404-section {
-  text-align: center;
-  padding: 20px;
-}
-
-.error-404-image {
-  width: 500px;
-  height: auto;
-  margin: 0 auto;
+.voting-component {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
 }
 
 /* Media query for smaller screens */

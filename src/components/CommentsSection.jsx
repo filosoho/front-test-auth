@@ -36,8 +36,20 @@ const CommentsSection = ({ articleId }) => {
         setComments(commentsWithUserDetails);
         setIsLoading(false);
       })
-      .catch((error) => setError("Error fetching comments: " + error.message));
-    setIsLoading(false);
+      .catch((error) => {
+        if (error.response) {
+          if (error.response.status === 404) {
+            setError("Comments not found.");
+          } else {
+            setError("An error occurred while fetching comments.");
+          }
+        } else if (error.request) {
+          setError("Network error: Unable to reach the server.");
+        } else {
+          setError("An unexpected error occurred.");
+        }
+        setIsLoading(false);
+      });
   }, [articleId, users]);
 
   const handleCommentChange = (event) => {
@@ -74,8 +86,20 @@ const CommentsSection = ({ articleId }) => {
         setCommentText("");
         setSuccessMessage("Your comment has been posted successfully.");
       })
-      .catch(() => {
-        setError("Failed to post comment. Please try again.");
+      .catch((error) => {
+        if (error.response) {
+          if (error.response.status === 400) {
+            setError(
+              "Failed to post comment. Please provide all required information."
+            );
+          } else {
+            setError("An error occurred while posting your comment.");
+          }
+        } else if (error.request) {
+          setError("Network error: Unable to reach the server.");
+        } else {
+          setError("An unexpected error occurred.");
+        }
       })
       .finally(() => {
         setIsSubmitting(false);
@@ -102,8 +126,14 @@ const CommentsSection = ({ articleId }) => {
           setSuccessMessage("Comment deleted successfully.");
         }
       })
-      .catch(() => {
-        setSuccessMessage("Failed to delete comment. Please try again.");
+      .catch((error) => {
+        if (error.response) {
+          setError("Failed to delete comment. Please try again.");
+        } else if (error.request) {
+          setError("Network error: Unable to reach the server.");
+        } else {
+          setError("An unexpected error occurred.");
+        }
       })
       .finally(() => {
         setDialogVisible(false);
@@ -158,7 +188,6 @@ const CommentsSection = ({ articleId }) => {
           />
           <h2>Comments</h2>
         </div>
-        {error && <p className="error">{error}</p>}
         <p className="comment-count">
           ({comments.length} Comment{comments.length !== 1 ? "s" : ""})
         </p>
@@ -169,7 +198,6 @@ const CommentsSection = ({ articleId }) => {
               comment={comment}
               user={loggedInUser}
               onDelete={showDialog}
-              // onDelete={handleDelete}
             />
           ))}
         </div>
