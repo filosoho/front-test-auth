@@ -3,6 +3,17 @@
   min-width: 200px;
   transition: box-shadow 0.3s ease;
 }
+.content-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.comments-votes p {
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+}
 
 .large-article-card {
   border: 1px solid #e8e7e7;

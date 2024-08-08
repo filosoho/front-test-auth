@@ -1,14 +1,12 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { fetchArticleById, voteOnArticle } from "../services/api";
+import { fetchArticleById } from "../services/api";
 import { UserContext } from "../contexts/UserContext";
 import { truncateText } from "../utils";
 import CommentsSection from "./CommentsSection";
 import Loading from "./Loading";
-import upArrow from "../assets/up-arrow.png";
-import downArrow from "../assets/down-arrow.png";
+import Voting from "./Voting";
 import error404Image from "../assets/Oops! 404 Error with a broken robot-cuate.svg";
-import votesIcon from "../assets/vote.png";
 import "../styles/ArticlePage.css";
 
 const ArticlePage = () => {
@@ -16,53 +14,19 @@ const ArticlePage = () => {
   const { loggedInUser } = useContext(UserContext);
   const [article, setArticle] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [votes, setVotes] = useState(0);
   const [error, setError] = useState("");
-  const [userVote, setUserVote] = useState(0);
-  const isLoggedIn = Boolean(loggedInUser.username);
 
   useEffect(() => {
     fetchArticleById(articleId)
       .then((data) => {
         setArticle(data);
-        setVotes(data.votes);
         setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching article:", error);
         setIsLoading(false);
       });
-
-    const storedVote = localStorage.getItem(
-      `vote-${articleId}-${loggedInUser.username}`
-    );
-    if (storedVote) {
-      setUserVote(Number(storedVote));
-    }
-  }, [articleId, loggedInUser.username]);
-
-  const handleVote = (voteChange) => {
-    if (!isLoggedIn) {
-      setError("Log in to vote on this article.");
-      return;
-    }
-
-    const newVote = userVote === voteChange ? 0 : voteChange;
-    const voteDiff = newVote - userVote;
-
-    setVotes((prevVotes) => prevVotes + voteDiff);
-    setUserVote(newVote);
-    localStorage.setItem(`vote-${articleId}-${loggedInUser.username}`, newVote);
-
-    setError("");
-
-    voteOnArticle(articleId, voteDiff).catch((err) => {
-      setVotes((prevVotes) => prevVotes - voteDiff);
-      setUserVote(userVote);
-      localStorage.removeItem(`vote-${articleId}-${loggedInUser.username}`);
-      setError("Failed to update vote. Please try again.");
-    });
-  };
+  }, [articleId]);
 
   if (isLoading) {
     return <Loading />;
@@ -98,31 +62,7 @@ const ArticlePage = () => {
       <article className="voting-article">
         <div className="article-page article-content">
           <div className="icon-votes-box">
-            <img className="votes-icon" src={votesIcon} alt="votes icon" />
-            <div className="article-vote-container">
-              <button
-                className={`vote-arrow ${userVote === 1 ? "active" : ""}`}
-                onClick={() => handleVote(1)}
-              >
-                <img
-                  className="arrow-vote"
-                  src={upArrow}
-                  alt="up arrow for upvote"
-                />
-              </button>
-              {votes}
-              <button
-                className={`vote-arrow ${userVote === -1 ? "active" : ""}`}
-                onClick={() => handleVote(-1)}
-              >
-                <img
-                  className="arrow-vote"
-                  src={downArrow}
-                  alt="down arrow for downvote"
-                />
-              </button>
-            </div>
-            {error && <p className="vote-error">{error}</p>}
+            <Voting articleId={articleId} initialVotes={article.votes} />
           </div>
           <h1 className="article-title">{article.title}</h1>
           <p className="article-author">By {article.author}</p>

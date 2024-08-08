@@ -24,12 +24,20 @@ const ArticleCard = ({ article, isLarge }) => {
           />
         )}
         <h2 className="article-title">{article.title}</h2>
-        <p className="article-date">
-          {new Date(article.created_at).toLocaleDateString()}
-        </p>
-        <p className="article-topic">
-          {"#" + capitalizeFirstLetter(article.topic)}
-        </p>
+        <div className="content-card">
+          <div>
+            <p className="article-date">
+              {new Date(article.created_at).toLocaleDateString()}
+            </p>
+            <p className="article-topic">
+              {"#" + capitalizeFirstLetter(article.topic)}
+            </p>
+          </div>
+          <div className="comments-votes">
+            <p>Votes: {article.votes}</p>
+            <p>Comments: {article.comment_count}</p>
+          </div>
+        </div>
       </Link>
     </article>
   );
