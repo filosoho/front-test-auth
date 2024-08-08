@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const api = axios.create({
-  baseURL: "https://nc-news-api-backend.onrender.com/api",
+  baseURL: apiUrl,
 });
 
 export const fetchArticles = (params) => {
