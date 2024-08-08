@@ -18,7 +18,8 @@ const ArticlePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [votes, setVotes] = useState(0);
   const [error, setError] = useState("");
-  const isLoggedIn = Object.keys(loggedInUser).length > 0;
+  const [userVote, setUserVote] = useState(0);
+  const isLoggedIn = Boolean(loggedInUser.username);
 
   useEffect(() => {
     fetchArticleById(articleId)
@@ -31,21 +32,36 @@ const ArticlePage = () => {
         console.error("Error fetching article:", error);
         setIsLoading(false);
       });
-  }, [articleId]);
+
+    const storedVote = localStorage.getItem(
+      `vote-${articleId}-${loggedInUser.username}`
+    );
+    if (storedVote) {
+      setUserVote(Number(storedVote));
+    }
+  }, [articleId, loggedInUser.username]);
 
   const handleVote = (voteChange) => {
     if (!isLoggedIn) {
       setError("Log in to vote on this article.");
-      return error;
-    } else {
-      setVotes(votes + voteChange);
-      setError("");
-
-      voteOnArticle(articleId, voteChange).catch((err) => {
-        setVotes(votes - voteChange);
-        setError("Failed to update vote. Please try again.");
-      });
+      return;
     }
+
+    const newVote = userVote === voteChange ? 0 : voteChange;
+    const voteDiff = newVote - userVote;
+
+    setVotes((prevVotes) => prevVotes + voteDiff);
+    setUserVote(newVote);
+    localStorage.setItem(`vote-${articleId}-${loggedInUser.username}`, newVote);
+
+    setError("");
+
+    voteOnArticle(articleId, voteDiff).catch((err) => {
+      setVotes((prevVotes) => prevVotes - voteDiff);
+      setUserVote(userVote);
+      localStorage.removeItem(`vote-${articleId}-${loggedInUser.username}`);
+      setError("Failed to update vote. Please try again.");
+    });
   };
 
   if (isLoading) {
@@ -62,7 +78,6 @@ const ArticlePage = () => {
         />
         <h3>Article Not Found</h3>
       </section>
-      // <a href="https://storyset.com/internet">Internet illustrations by Storyset</a>
     );
   }
 
@@ -85,7 +100,10 @@ const ArticlePage = () => {
           <div className="icon-votes-box">
             <img className="votes-icon" src={votesIcon} alt="votes icon" />
             <div className="article-vote-container">
-              <button className="vote-arrow" onClick={() => handleVote(1)}>
+              <button
+                className={`vote-arrow ${userVote === 1 ? "active" : ""}`}
+                onClick={() => handleVote(1)}
+              >
                 <img
                   className="arrow-vote"
                   src={upArrow}
@@ -93,7 +111,10 @@ const ArticlePage = () => {
                 />
               </button>
               {votes}
-              <button className="vote-arrow" onClick={() => handleVote(-1)}>
+              <button
+                className={`vote-arrow ${userVote === -1 ? "active" : ""}`}
+                onClick={() => handleVote(-1)}
+              >
                 <img
                   className="arrow-vote"
                   src={downArrow}

@@ -1,21 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { fetchArticles } from "../services/api";
 import ArticleCard from "./ArticleCard";
 import "../styles/ArticlesList.css";
 
-const ArticlesList = () => {
-  const [articles, setArticles] = useState([]);
-
-  useEffect(() => {
-    fetchArticles()
-      .then((data) => {
-        setArticles(data.articles);
-      })
-      .catch((error) => {
-        console.error("Error fetching articles: ", error);
-      });
-  }, []);
-
+const ArticlesList = ({ articles }) => {
   const [largeArticle, ...otherArticles] = articles;
 
   return (

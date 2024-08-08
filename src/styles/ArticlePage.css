@@ -118,6 +118,27 @@
   margin-top: 5px;
 }
 
+.vote-feedback {
+  color: #007bff;
+  font-size: 0.9em;
+  margin-top: 0.5em;
+}
+
+.vote-error {
+  color: #dc3545;
+  font-size: 0.9em;
+  margin-top: 0.5em;
+}
+
+.vote-arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.vote-arrow.active {
+  background-color: #e0e0e0;
+}
+
 /* Media query for smaller screens */
 @media (max-width: 768px) {
   .article-page > .article-title {
