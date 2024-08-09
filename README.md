@@ -8,7 +8,7 @@ You can access the deployed version of the app here: [FE NC News](https://https:
 
 ## Backend Repository
 
-The backend for this project is available at: [BE NC News](https://github.com/your-backend-repo)
+The backend for this project is available at: [BE NC News](https://github.com/filosoho/nc-news)
 
 ## General Information
 
