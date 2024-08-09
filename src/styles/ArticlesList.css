@@ -27,11 +27,10 @@
   .articles-list {
     flex-direction: column;
     align-items: center;
-    margin-right: 4rem;
   }
 
   .large-article {
-    width: 100%;
+    min-width: 100%;
   }
 
   .grid-articles {
@@ -42,5 +41,6 @@
   .article-card,
   .large-article-card {
     width: 100%;
+    margin: 0;
   }
 }

@@ -33,15 +33,42 @@
   margin-bottom: 1em;
 }
 
-.not-found img {
+.not-found img,
+.error-400-image,
+.error-404-image {
   max-width: 100%;
   height: auto;
-  margin-bottom: 1.5em;
+  margin: 1.5em auto;
 }
 
-.error-400-image,
+/* .error-400-image,
 .error-404-image {
   width: 500px;
   height: auto;
   margin: 0 auto;
+} */
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .not-found h3,
+  .error-400-section h3,
+  .error-404-section h3 {
+    font-size: 1.2em;
+    margin-bottom: 1rem;
+    margin-inline: 2rem;
+  }
+
+  .not-found p,
+  .error-400-section p,
+  .error-404-section p {
+    margin-inline: 2rem;
+    font-size: 0.8em;
+    font-weight: 500;
+  }
+
+  .not-found img,
+  .error-400-image,
+  .error-404-image {
+    max-width: 80%;
+  }
 }
