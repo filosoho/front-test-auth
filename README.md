@@ -4,7 +4,7 @@ This is a news application built with React for the frontend, using React Router
 
 ## Deployed Version
 
-You can access the deployed version of the app here: [FE NC News](https://https://fe-nc-news-gui8.onrender.com/)
+You can access the deployed version of the app here: [FE NC News](https://fe-nc-news-gui8.onrender.com/)
 
 ## Backend Repository
 
