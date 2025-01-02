@@ -140,6 +140,9 @@ header hr {
   background-color: var(--fourth-text-color);
   outline: none;
 }
+.subscribe-box button:focus {
+  background-color: #0b0b0b;
+}
 
 .day-location {
   display: flex;
@@ -303,9 +306,6 @@ header hr {
 .header-article-card .header-image-wrapper img {
   position: relative;
   z-index: 0;
-}
-
-@media (max-width: 1285px) {
 }
 
 @media (max-width: 970px) {
