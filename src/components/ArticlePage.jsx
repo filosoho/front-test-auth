@@ -2,7 +2,10 @@ import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { fetchArticleById } from "../services/api";
 import { UserContext } from "../contexts/UserContext";
-import { truncateText } from "../utils";
+import { truncateText } from "../utils/utils.js";
+import { formatDate, timeAgo } from "../utils/dateUtils";
+import { calculateReadTime } from "../utils/articleUtils";
+import clockImg from "../assets/clock-black.svg";
 import CommentsSection from "./CommentsSection";
 import Loading from "./Loading";
 import Voting from "./Voting";
@@ -59,6 +62,17 @@ const ArticlePage = () => {
     return <NotFoundArticle />;
   }
 
+  const { formattedDate, formattedTime } = formatDate(article.created_at);
+  const readTime = calculateReadTime(article.body);
+  const renderClockWithDate = () => {
+    return (
+      <>
+        <img className="clock-img-page" src={clockImg} alt="Clock" />
+        {formattedDate}
+      </>
+    );
+  };
+
   const altText = `Image for the article titled "${truncateText(
     article.title,
     40
@@ -79,10 +93,18 @@ const ArticlePage = () => {
             <Voting articleId={articleId} initialVotes={article.votes} />
           </div>
           <h1 className="article-title">{article.title}</h1>
-          <p className="article-author">By {article.author}</p>
-          <p className="article-date">
-            {new Date(article.created_at).toLocaleDateString()}
-          </p>
+          <div className="article-page-info">
+            <p className="article-author">
+              <span>by </span> {article.author}
+            </p>
+            <p className="em-dash">—</p>
+            <div className="article-time-box">
+              <p>{renderClockWithDate()}</p>
+            </div>
+          </div>
+          <div className="article-date">
+            <p className="article-read-time">Read Time: {readTime} min</p>{" "}
+          </div>
           <article className="article-body">{article.body}</article>
         </div>
       </article>
