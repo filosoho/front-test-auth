@@ -1,3 +1,15 @@
-.lottie {
+.loading-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lottie-animation {
   width: 200px;
+}
+
+@media (max-width: 480px) {
+  .lottie-animation {
+    width: 120px;
+  }
 }
