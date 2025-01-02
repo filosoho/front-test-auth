@@ -55,7 +55,6 @@ form {
 .add-comment button {
   font-size: 1em;
   background-color: var(--btn);
-  color: var(--third-color);
   border: none;
   padding: 10px 20px;
   border-radius: var(--border-radius);
