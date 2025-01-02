@@ -5,8 +5,8 @@ import "../styles/Loading.css";
 
 const Loading = () => {
   return (
-    <section className="home-page">
-      <article className="lottie">
+    <section className="loading-box">
+      <article className="lottie-animation">
         <Lottie animationData={loadingHand} loop={true} />
       </article>
     </section>

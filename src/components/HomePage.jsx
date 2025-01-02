@@ -5,6 +5,8 @@ import { fetchArticles, fetchTopics } from "../services/api";
 import ArticlesList from "./ArticlesList";
 import Loading from "./Loading";
 import { TopicNotFound } from "./ErrorsComponent";
+import ascendingImg from "../assets/ascending.svg";
+import descendingImg from "../assets/descending.svg";
 import "../styles/HomePage.css";
 
 const HomePage = () => {
@@ -28,6 +30,7 @@ const HomePage = () => {
           sort_by: searchParams.get("sort_by") || "created_at",
           order: searchParams.get("order") || "desc",
           topic: searchParams.get("topic") || null,
+          limit: 37,
         });
       })
       .then((data) => {
@@ -45,6 +48,7 @@ const HomePage = () => {
   }, [searchParams]);
 
   const handleTopicChange = (selectedOption) => {
+    console.log("selected option topic: ", selectedOption);
     setSelectedTopic(selectedOption);
     setSearchParams({
       topic: selectedOption ? selectedOption.value : "",
@@ -91,30 +95,53 @@ const HomePage = () => {
     return <TopicNotFound />;
   }
 
+  const customStyles = {
+    control: (styles) => ({
+      ...styles,
+      boxShadow: "none",
+      borderColor: "#ccc",
+      "&:hover": {
+        borderColor: "dimgrey",
+      },
+    }),
+    singleValue: (styles) => ({
+      ...styles,
+      backgroundColor: "white",
+      width: "80px",
+      minWidth: "80px",
+      maxWidth: "100px",
+    }),
+    option: (styles, { isSelected }) => ({
+      ...styles,
+      backgroundColor: isSelected ? "#0b0b0b" : "white",
+      color: isSelected ? "white" : "#0b0b0b",
+      ":hover": {
+        backgroundColor: isSelected ? "#0b0b0b" : "#e6141e",
+        color: "white",
+      },
+    }),
+  };
+
   return (
     <section className="home-page">
       <div className="controls">
-        <div className="topic-selector">
-          <label htmlFor="topic-select"></label>
-          <Select
-            id="topic-select"
-            value={selectedTopic}
-            onChange={handleTopicChange}
-            options={topicOptions}
-            placeholder="Select a topic..."
-          />
-        </div>
         <div className="sort-selector">
-          <label htmlFor="sort-select">Sort By:</label>
+          <label htmlFor="react-select-3-input">Sort By:</label>
           <Select
             id="sort-select"
+            aria-label="Sort By"
             value={sortOptions.find((option) => option.value === sortBy)}
             onChange={handleSortChange}
             options={sortOptions}
+            placeholder="Sort By..."
+            className="react-select-container"
+            classNamePrefix="react-select"
+            styles={customStyles}
           />
-          <button onClick={handleOrderChange}>
-            {order === "asc" ? "Descending" : "Ascending"}
-          </button>
+          <img
+            onClick={handleOrderChange}
+            src={order === "asc" ? descendingImg : ascendingImg}
+          />
         </div>
       </div>
       <ArticlesList articles={articles} />

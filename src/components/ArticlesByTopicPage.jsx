@@ -1,38 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
+import { ArticlesContext } from "../contexts/ArticlesContext";
 import { useParams } from "react-router-dom";
-import { fetchArticles } from "../services/api";
 import Loading from "./Loading";
+import { TopicNotFound } from "./ErrorsComponent";
 import ArticleCard from "./ArticleCard";
 import "../styles/ArticlesByTopicPage.css";
 
 const ArticlesByTopicPage = () => {
+  const { allArticles } = useContext(ArticlesContext);
   const { topic } = useParams();
-  const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
 
-  useEffect(() => {
-    const params = topic ? { topic } : {};
+  const filteredArticles = topic
+    ? allArticles.filter((article) => article.topic === topic)
+    : allArticles;
 
-    fetchArticles(params)
-      .then((data) => {
-        setArticles(data.articles);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setError("Failed to fetch articles.");
-        setIsLoading(false);
-      });
-  }, [topic]);
+  if (!allArticles || allArticles.length === 0) {
+    return <Loading />;
+  }
 
-  if (isLoading) return <Loading />;
+  if (topic && filteredArticles.length === 0) {
+    return <TopicNotFound />;
+  }
 
   return (
-    <section className="articles-by-topic-page">
+    <section className="container articles-by-topic-page">
       <h1>{topic}</h1>
       <div className="articles-topic-list">
-        {articles.length > 0 ? (
-          articles.map((article) => (
+        {filteredArticles.length > 0 ? (
+          filteredArticles.map((article) => (
             <ArticleCard key={article.article_id} article={article} />
           ))
         ) : (

@@ -41,13 +41,6 @@
   margin: 1.5em auto;
 }
 
-/* .error-400-image,
-.error-404-image {
-  width: 500px;
-  height: auto;
-  margin: 0 auto;
-} */
-
 /* Media query for smaller screens */
 @media (max-width: 768px) {
   .not-found h3,

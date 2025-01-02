@@ -65,7 +65,7 @@ const CommentCard = ({ comment, user, onDelete }) => {
             >
               {isDeleting ? "Deleting..." : "Delete"}
             </button>
-            <button>Edit</button>
+            <button className="edit-btn">Edit</button>
           </div>
         )}
       </article>

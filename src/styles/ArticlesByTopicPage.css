@@ -1,15 +1,13 @@
 .articles-by-topic-page {
   padding: 20px;
-  max-width: 1400px;
   margin: 0 auto;
 }
 
 .articles-by-topic-page h1 {
-  font-size: 2em;
-  margin: 4rem auto;
+  font-size: 1.2em;
+  margin: 2rem auto;
   text-align: left;
   text-transform: uppercase;
-  padding-left: 0.5em;
 }
 
 .articles-list {
@@ -45,4 +43,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 30px;
+}
+
+@media (max-width: 480px) {
+  .articles-topic-list {
+    gap: 0;
+  }
 }

@@ -2,7 +2,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 4rem;
+  margin: 4rem auto;
+}
+.login-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .login-page h2 {
@@ -10,7 +16,8 @@
   color: var(--text-color);
 }
 
-.login-page input {
+.login-box input {
+  width: 140px;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid var(--secondary-text-color);
@@ -19,11 +26,11 @@
 }
 
 .login-page button {
-  width: 200px;
+  width: 140px;
   padding: 10px 20px;
   border: none;
   border-radius: var(--border-radius);
-  background-color: var(--secondary-color);
+  background-color: #0b0b0b;
   color: var(--third-color);
   cursor: pointer;
   font-family: var(--font-family);
@@ -31,7 +38,7 @@
 }
 
 .login-page button:hover {
-  background-color: var(--secondary-color-hover);
+  background-color: var(--fourth-text-color);
 }
 
 .error {
@@ -41,5 +48,10 @@
 
 .success {
   color: var(--success-color);
-  margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  .login-page h2 {
+    font-size: 1.2rem;
+  }
 }

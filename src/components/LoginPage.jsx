@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchUsers } from "../services/api";
 import { AuthContext } from "../contexts/AuthContext";
@@ -26,7 +26,7 @@ const LoginPage = () => {
             navigate("/");
           }, 1000);
         } else {
-          setError("User not found");
+          setError("Incorrect user name");
           setSuccess("");
         }
       })
@@ -40,13 +40,15 @@ const LoginPage = () => {
   return (
     <section className="login-page">
       <h2>Login</h2>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
-      />
-      <button onClick={handleLogin}>Login</button>
+      <div className="login-box">
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Username"
+        />
+        <button onClick={handleLogin}>Login</button>
+      </div>
       {success && <p className="success">{success}</p>}
       {error && <p className="error">{error}</p>}
     </section>

@@ -52,6 +52,16 @@ const CommentsSection = ({ articleId }) => {
       });
   }, [articleId, users]);
 
+  useEffect(() => {
+    if (successMessage) {
+      const timeoutId = setTimeout(() => {
+        setSuccessMessage("");
+      }, 2000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [successMessage]);
+
   const handleCommentChange = (event) => {
     setCommentText(event.target.value);
   };
@@ -175,7 +185,9 @@ const CommentsSection = ({ articleId }) => {
                 {error}
               </p>
             )}
-            {successMessage && <p className="success">{successMessage}</p>}
+            <p className={`success ${successMessage ? "visible" : ""}`}>
+              {successMessage}
+            </p>
           </form>
         </section>
       )}
