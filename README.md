@@ -50,14 +50,14 @@ To run this project locally, follow these steps:
 
 4. Create a .env file in the root of your project.
 
-   If you are adding your own API, please make sure you are following the documentation on how to structure it [here](https://nc-news-api-backend.onrender.com/api). You can find there a detailed information on available endpoints, request methods, and examples.
+   If you are adding your own API, please make sure you are following the documentation on how to structure it [here](https://nc-news-ivory.vercel.app/api). You can find there a detailed information on available endpoints, request methods, and examples.
 
    Recommended extension to view JSON files [JSON Viewer Pro](https://chromewebstore.google.com/detail/json-viewer-pro/eifflpmocdbdmepbjaopkkhbfmdgijcc).
 
    And add either the nc-news backend API as below or your own API base URL.
 
    ```bash
-   VITE_API_URL=https://nc-news-api-backend.onrender.com/api
+   VITE_API_URL=https://nc-news-ivory.vercel.app/api
    ```
 
 5. Run the development server
