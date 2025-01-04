@@ -4,7 +4,7 @@ import Select from "react-select";
 import { fetchArticles, fetchTopics } from "../services/api";
 import ArticlesList from "./ArticlesList";
 import Loading from "./Loading";
-import { TopicNotFound } from "./ErrorsComponent";
+import { CouldNotLoadArticles } from "./ErrorsComponent";
 import ascendingImg from "../assets/ascending.svg";
 import descendingImg from "../assets/descending.svg";
 import "../styles/HomePage.css";
@@ -39,7 +39,9 @@ const HomePage = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 404) {
-          setError("Topic not found.");
+          setError(
+            "Couldn't fetch articles. Please wait a moment and try again."
+          );
         } else {
           setError("An unexpected error occurred.");
         }
@@ -92,7 +94,7 @@ const HomePage = () => {
   }
 
   if (error) {
-    return <TopicNotFound />;
+    return <CouldNotLoadArticles />;
   }
 
   const customStyles = {

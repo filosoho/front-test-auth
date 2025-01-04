@@ -16,7 +16,7 @@ export function BadRequestPage() {
         />
         <h3>Beware! The Bad Request Beast Awaits!</h3>
         <p>
-          It appears your request was not quite right, and the Bad Request Beast
+          It appears your request was not quite right and the Bad Request Beast
           has taken notice.
         </p>
       </article>
@@ -72,6 +72,25 @@ export function TopicNotFound() {
         />
         <h3>Topic Not Found</h3>
         <p>Oh no! This topic seems to have vanished into thin air.</p>
+      </article>
+    </section>
+  );
+}
+
+export function CouldNotLoadArticles() {
+  return (
+    <section className="error-404-section">
+      <article>
+        <img
+          src={monsterError404}
+          alt="404 Error Could Not Load Articles with a cute monster"
+          className="error-404-image"
+        />
+        <h3>Uh-oh! Articles Are Taking Their Sweet Time</h3>
+        <p>
+          Something went a bit sideways. Refresh the page and we’ll get those
+          articles back on track!
+        </p>
       </article>
     </section>
   );
