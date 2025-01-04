@@ -1,9 +1,9 @@
 import React from "react";
 import "../styles/ErrorsComponent.css";
-import error400Image from "../assets/400 Error Bad Request-rafiki.svg";
-import error404Image from "../assets/Oops! 404 Error with a broken robot-cuate.svg";
-import monsterError404 from "../assets/Monster 404 Error-amico.svg";
-import error404Img from "../assets/Monster 404 Error-cuate.svg";
+import error400Image from "../assets/400-Error-Bad-Request-rafiki.svg";
+import error404Image from "../assets/Oops!-404-Error-with-a-broken-robot-cuate.svg";
+import monsterError404 from "../assets/Monster-404-Error-amico.svg";
+import error404Img from "../assets/Monster-404-Error-cuate.svg";
 
 export function BadRequestPage() {
   return (
