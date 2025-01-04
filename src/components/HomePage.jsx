@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Select from "react-select";
 import { fetchArticles } from "../services/api";
 import ArticlesList from "./ArticlesList";
@@ -15,7 +15,6 @@ const HomePage = () => {
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [sortBy, setSortBy] = useState("created_at");
   const [order, setOrder] = useState("desc");
-  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [error, setError] = useState(null);
 

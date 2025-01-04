@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { fetchArticles, fetchTopics } from "../services/api";
 
 export const ArticlesContext = createContext();
@@ -18,7 +18,7 @@ export const ArticlesProvider = ({ children }) => {
         setAllArticles(articlesData.articles);
         setTopics(topicsData);
 
-         const headerArticles = articlesData.articles
+        const headerArticles = articlesData.articles
           .filter((article) => article.topic === "coding")
           .slice(6, 13);
         setHeaderArticles(headerArticles);
