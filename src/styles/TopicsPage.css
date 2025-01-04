@@ -1,6 +1,6 @@
 .topics-page {
   padding: 20px;
-  max-width: 800px;
+  max-width: 400px;
   margin: 0 auto;
 }
 
@@ -17,7 +17,6 @@
 }
 
 .topic-item {
-  background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 15px;
@@ -25,19 +24,24 @@
   transition: background-color 0.3s;
 }
 
-.topic-item:hover,
-.topic-item:focus {
-  background-color: #e0e0e0;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
 .topic-item a {
   font-size: 1.5em;
-  color: #0073e6;
+  color: var(--primary-color);
   text-decoration: none;
 }
-
 .topic-item p {
   margin: 5px 0;
   color: #555;
+}
+.topic-item:hover,
+.topic-item:focus {
+  background-color: black;
+  color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.topic-item:hover a,
+.topic-item:focus a,
+.topic-item:hover p,
+.topic-item:focus p {
+  color: white;
 }

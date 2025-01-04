@@ -1,27 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
+import { ArticlesContext } from "../contexts/ArticlesContext";
 import { Link } from "react-router-dom";
-import { fetchTopics } from "../services/api";
 import Loading from "../components/Loading";
+import { TopicNotFound } from "./ErrorsComponent";
 import "../styles/TopicsPage.css";
 
 const TopicsPage = () => {
-  const [topics, setTopics] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    fetchTopics()
-      .then((data) => {
-        setTopics(data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setError("Failed to fetch topics.");
-        setIsLoading(false);
-      });
-  }, []);
+  const { topics, isLoading, error } = useContext(ArticlesContext);
 
   if (isLoading) return <Loading />;
+  if (error) return <TopicNotFound />;
 
   return (
     <div className="topics-page">
