@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Select from "react-select";
-import { fetchArticles, fetchTopics } from "../services/api";
+import { fetchArticles } from "../services/api";
 import ArticlesList from "./ArticlesList";
 import Loading from "./Loading";
 import { CouldNotLoadArticles } from "./ErrorsComponent";
@@ -12,7 +12,6 @@ import "../styles/HomePage.css";
 const HomePage = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [topics, setTopics] = useState([]);
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [sortBy, setSortBy] = useState("created_at");
   const [order, setOrder] = useState("desc");
@@ -22,17 +21,12 @@ const HomePage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-
-    fetchTopics()
-      .then((data) => {
-        setTopics(data);
-        return fetchArticles({
-          sort_by: searchParams.get("sort_by") || "created_at",
-          order: searchParams.get("order") || "desc",
-          topic: searchParams.get("topic") || null,
-          limit: 37,
-        });
-      })
+    fetchArticles({
+      sort_by: searchParams.get("sort_by") || "created_at",
+      order: searchParams.get("order") || "desc",
+      topic: searchParams.get("topic") || null,
+      limit: 37,
+    })
       .then((data) => {
         setArticles(data.articles);
         setIsLoading(false);
@@ -48,16 +42,6 @@ const HomePage = () => {
         setIsLoading(false);
       });
   }, [searchParams]);
-
-  const handleTopicChange = (selectedOption) => {
-    console.log("selected option topic: ", selectedOption);
-    setSelectedTopic(selectedOption);
-    setSearchParams({
-      topic: selectedOption ? selectedOption.value : "",
-      sort_by: sortBy,
-      order: order,
-    });
-  };
 
   const handleSortChange = (selectedOption) => {
     setSortBy(selectedOption.value);
@@ -77,11 +61,6 @@ const HomePage = () => {
       order: newOrder,
     });
   };
-
-  const topicOptions = topics.map((topic) => ({
-    value: topic.slug,
-    label: topic.slug,
-  }));
 
   const sortOptions = [
     { value: "created_at", label: "Date" },
