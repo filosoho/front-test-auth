@@ -26,6 +26,7 @@ export const fetchCommentsByArticleId = (articleId) => {
 
 export const fetchUsers = () => {
   return api.get("/users").then((response) => {
+    console.log("response fetch users: ", response);
     return response.data.users;
   });
 };
